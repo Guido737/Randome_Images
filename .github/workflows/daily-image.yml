@@ -19,7 +19,7 @@ jobs:
       - name: Download previous sent log
         uses: actions/download-artifact@v4
         with:
-          name: sent-log
+          name: sent.log
           path: .
         continue-on-error: true
 
@@ -36,12 +36,8 @@ jobs:
           test -f sent.log && cat sent.log || (echo "sent.log NOT found!" && exit 1)
 
 
-      - name: Check sent.log exists
-        run: ls -la sent.log
-
       - name: Upload log file
         uses: actions/upload-artifact@v4
         with:
-          name: sent-log
+          name: sent.log
           path: sent.log
-
