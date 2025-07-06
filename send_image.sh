@@ -8,6 +8,11 @@ CHAT_ID="${CHAT_ID}"
 
 touch "$LOG_FILE"
 
+if [ ! -d "$IMAGES_DIR" ]; then
+  echo "Directory $IMAGES_DIR does not exist!" >&2
+  exit 1
+fi
+
 all_images=($(ls "$IMAGES_DIR"))
 sent_images=($(cat "$LOG_FILE"))
 
@@ -19,7 +24,7 @@ for img in "${all_images[@]}"; do
 done
 
 if [ ${#unsent_images[@]} -eq 0 ]; then
-    echo "All images has been sended. Log Restart."
+    echo "All images has been sent. Restarting log."
     > "$LOG_FILE"
     unsent_images=("${all_images[@]}")
 fi

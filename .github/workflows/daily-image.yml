@@ -16,8 +16,21 @@ jobs:
       - name: Make script executable
         run: chmod +x send_image.sh
 
+      - name: Download previous sent log
+        uses: actions/download-artifact@v4
+        with:
+          name: sent-log
+          path: .
+        continue-on-error: true
+
       - name: Run Bash script
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: ./send_image.sh
+
+      - name: Upload log file
+        uses: actions/upload-artifact@v4
+        with:
+          name: sent-log
+          path: sent.log
