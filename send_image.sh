@@ -16,7 +16,9 @@ if [ ! -d "$IMAGES_DIR" ]; then
   exit 1
 fi
 
-touch "$LOG_FILE"
+if [ ! -f "$LOG_FILE" ]; then
+  touch "$LOG_FILE"
+fi
 
 mapfile -t all_images < <(find "$IMAGES_DIR" -maxdepth 1 -type f -printf '%f\n')
 mapfile -t sent_images < "$LOG_FILE"
