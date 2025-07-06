@@ -20,6 +20,11 @@ if [ ! -f "$LOG_FILE" ]; then
   touch "$LOG_FILE"
 fi
 
+if [ ! -s "$LOG_FILE" ]; then
+  echo "sent.log not found or empty, starting fresh"
+  : > "$LOG_FILE"
+fi
+
 mapfile -t all_images < <(find "$IMAGES_DIR" -maxdepth 1 -type f -printf '%f\n')
 mapfile -t sent_images < "$LOG_FILE"
 
