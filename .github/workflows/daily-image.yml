@@ -20,7 +20,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: sent-log
-          path: Random_Images
+          path: .
         continue-on-error: true
 
       - name: Run Bash script
@@ -28,21 +28,20 @@ jobs:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: ./send_image.sh
-        working-directory: Random_Images
+
 
       - name: Verify sent.log
         run: |
           echo "Checking sent.log"
           test -f sent.log && cat sent.log || (echo "sent.log NOT found!" && exit 1)
-        working-directory: Random_Images
+
 
       - name: Check sent.log exists
         run: ls -la sent.log
-        working-directory: Random_Images
-
 
       - name: Upload log file
         uses: actions/upload-artifact@v4
         with:
           name: sent-log
-          path: Random_Images/sent.log
+          path: sent.log
+
