@@ -1,10 +1,8 @@
 name: Send-Random-Image
 
 on:
-  schedule:
-    - cron: '0 12 * * *'
   workflow_dispatch:
-
+  
 jobs:
   send:
     runs-on: ubuntu-24.04
